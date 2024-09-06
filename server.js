@@ -8,21 +8,21 @@ const app = express();
 const PORT = 3000;
 
 // 파일 업로드를 위한 multer 설정
-const upload = multer({ dest: 'uploads/' }); // 업로드된 파일을 저장할 폴더 지정
+const upload = multer({ dest: "uploads/" }); // 업로드된 파일을 저장할 폴더 지정
 
 // Body parser 미들웨어 설정
-app.use(bodyParser.json()); // JSON 형식의 요청 바디를 파싱
-app.use(bodyParser.urlencoded({ extended: true })); // URL-encoded 형식의 요청 바디를 파싱
+app.use(express.json()); // JSON 형식의 요청 바디를 파싱
+app.use(express.urlencoded({ extended: true })); // URL-encoded 형식의 요청 바디를 파싱
 
 // 정적 파일 서빙 (CSS, 이미지, JS 등)
-app.use(express.static(path.join(__dirname, "public"))); // public 폴더에 있는 파일들을 정적 파일로 서빙
-app.use('/uploads', express.static('uploads')); // 업로드된 파일을 서빙하는 라우트 설정
+app.use(express.static(path.join(__dirname, "public"))); // public 폴더를 정적 파일로 서빙
+app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // 업로드된 파일을 서빙하는 라우트 설정
 
 // 영화 회고록 데이터 샘플
 let records = [];
 
 // 파일에서 records 데이터를 불러옴
-fs.readFile('records.json', (err, data) => {
+fs.readFile("records.json", (err, data) => {
   if (err) {
     console.error("데이터 로드 중 오류 발생:", err);
     records = []; // 오류가 발생하면 빈 배열로 초기화
@@ -34,16 +34,21 @@ fs.readFile('records.json', (err, data) => {
 
 // records 데이터를 파일에 저장하는 함수
 const saveRecordsToFile = () => {
-  fs.writeFile('records.json', JSON.stringify(records, null, 2), (err) => {
+  fs.writeFile("records.json", JSON.stringify(records, null, 2), (err) => {
     if (err) {
       console.error("데이터 저장 중 오류 발생:", err);
     }
   });
 };
 
-// 홈 라우트
+// 글쓰기 페이지 라우트
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "records.html")); // public 폴더의 records.html 파일을 응답으로 보냄
+  res.sendFile(path.join(__dirname, "public", "write.html")); // write.html의 정확한 경로 설정
+});
+
+// 마이페이지 라우트
+app.get("/mypage", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "mypage.html")); // mypage.html의 정확한 경로 설정
 });
 
 // 모든 records 데이터를 가져오는 라우트
@@ -64,20 +69,25 @@ app.get("/api/records/:id", (req, res) => {
 });
 
 // 새로운 record를 추가하는 라우트
-app.post("/api/records", (req, res) => {
+app.post("/api/records", upload.single("photo"), (req, res) => {
+  const { title, content, rating } = req.body; // write.html에서 전송된 텍스트 데이터
+  const photoPath = req.file ? `/uploads/${req.file.filename}` : "default.jpg"; // 업로드된 이미지 파일 경로
+
   const newRecord = {
     id: records.length + 1, // 새로운 ID 설정
-    title: req.body.title, // 제목 설정
-    image: req.body.image || "poster2.jpg", // 이미지 설정 (기본값으로 poster2.jpg 사용)
-    content: req.body.content || "" // 본문 내용 설정
+    title,
+    content,
+    rating,
+    image: photoPath, // 이미지 경로 설정
   };
+
   records.push(newRecord); // records 배열에 추가
   saveRecordsToFile(); // 파일에 저장
   res.status(201).json(newRecord); // 201 상태코드와 함께 새로 추가된 record를 응답
 });
 
 // record를 수정하는 라우트
-app.put("/api/records/:id", upload.single('image'), (req, res) => {
+app.put("/api/records/:id", upload.single("image"), (req, res) => {
   const recordId = parseInt(req.params.id, 10);
   const record = records.find((r) => r.id === recordId);
 

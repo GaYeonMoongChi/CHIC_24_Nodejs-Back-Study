@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Journal</title>
+    <link rel="stylesheet" href="write.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Movie Journal</h1>
+
+      <!-- 사진 업로드 섹션 -->
+      <div class="photo-upload">
+        <label for="photo">Upload Photo:</label>
+        <input type="file" id="photo" accept="image/*" />
+      </div>
+
+      <!-- 별점 주기 섹션 -->
+      <div class="rating">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+      </div>
+
+      <!-- 리뷰 작성 섹션 -->
+      <div class="review">
+        <textarea id="review" placeholder="Write a short review..."></textarea>
+      </div>
+
+      <!-- 저장 버튼 -->
+      <button id="save">Save</button>
+
+      <!-- 마이페이지로 이동 버튼 -->
+      <button id="goToMypage">My Page</button>
+    </div>
+
+    <!-- 하단 네비게이션 바 -->
+    <div class="bottom-nav">
+      <!--홈화면 연결 필요-->
+      <!-- 홈 화면 연결 -->
+      <a href="/"><span class="nav-item" id="home">홈</span></a>
+      <!-- 기록 작성 화면 연결 -->
+      <a href="/write.html"
+        ><span class="nav-item" id="add-record">기록 작성</span></a
+      >
+      <!-- 기록 확인 화면 연결 -->
+      <a href="/records.html"
+        ><span class="nav-item" id="my-records">나의 기록</span></a
+      >
+      <!-- 마이페이지 연결 -->
+      <a href="/mypage.html"
+        ><span class="nav-item" id="my-records">마이페이지</span></a
+      >
+    </div>
+
+    <script src="write.js"></script>
+  </body>
+</html>

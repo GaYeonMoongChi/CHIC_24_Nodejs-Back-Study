@@ -1,0 +1,80 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.photo-upload,
+.rating,
+.review {
+  margin-bottom: 20px;
+}
+
+.star {
+  font-size: 2rem;
+  cursor: pointer;
+  color: lightgray;
+  transition: color 0.3s;
+}
+
+.star.selected {
+  color: gold; /* 선택된 별의 색상 */
+}
+
+.rating {
+  display: flex;
+  gap: 5px;
+  margin: 10px 0;
+}
+
+#save {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#save:hover {
+  background: #0056b3;
+}
+
+/* 하단 네비게이션 바 */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* 고정된 높이 설정 */
+  background-color: #333; /* 어두운 색상으로 변경 */
+  display: flex;
+  justify-content: space-around; /* 네비게이션 아이템을 균등하게 배치 */
+  align-items: center;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* 다른 요소 위에 표시되도록 z-index 설정 */
+}
+
+.nav-item {
+  font-size: 12px;
+  color: white; /* 글자 색상을 흰색으로 변경 */
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 10px; /* 네비게이션 아이템 간의 간격 설정 */
+}

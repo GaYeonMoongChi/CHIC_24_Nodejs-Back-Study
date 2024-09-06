@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Page</title>
+    <link rel="stylesheet" href="/mypage.css" />
+  </head>
+  <body>
+    <div class="mypage-container">
+      <div class="profile-section">
+        <img
+          id="profile-photo"
+          src="/images/default-profile.png"
+          alt="Profile"
+        />
+        <button id="edit-photo">사진 수정</button>
+        <button id="delete-photo">삭제</button>
+      </div>
+      <div class="info-section">
+        <input type="text" id="name" placeholder="이름 변경" />
+        <input type="password" id="password" placeholder="비밀번호 변경" />
+      </div>
+
+      <div class="info-section">
+        <input type="phone" placeholder="Phone" />
+        <input type="email" placeholder="Email" />
+        <button>Save</button>
+      </div>
+      <!--
+        <div class="history">
+            <h2>나의 인생작</h2>
+            <div class="movies">
+                 사용자 영화 목록이 여기에 표시됩니다
+            </div>
+        </div>
+        -->
+
+      <!-- 하단 네비게이션 바 -->
+      <div class="bottom-nav">
+        <!--홈화면 연결 필요-->
+        <!-- 홈 화면 연결 -->
+        <a href="/"><span class="nav-item" id="home">홈</span></a>
+        <!-- 기록 작성 화면 연결 -->
+        <a href="/write.html"
+          ><span class="nav-item" id="add-record">기록 작성</span></a
+        >
+        <!-- 기록 확인 화면 연결 -->
+        <a href="/records.html"
+          ><span class="nav-item" id="my-records">나의 기록</span></a
+        >
+        <!-- 마이페이지 연결 -->
+        <a href="/mypage.html"
+          ><span class="nav-item" id="my-records">마이페이지</span></a
+        >
+      </div>
+    </div>
+
+    <script src="/public/mypage.js"></script>
+  </body>
+</html>
